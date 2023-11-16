@@ -1,6 +1,6 @@
 <template>
     <div class="h-screen w-screen p-12">
-        <div class="flex border border-red border-t-0 border-r-0 border-l-0">
+        <div class="flex border border-red border-t-0 border-r-0 border-l-0 py-2">
             <h1 class="w-full justify-end font-bold text-3xl">SKILL MATCH</h1>
             <button class="border border-black px-8 rounded-full whitespace-nowrap font-semibold">Sign In</button>
         </div>
