@@ -11,7 +11,7 @@
             <div class="w-full">
             <div class=" w-1/2 px-2 py-2 mx-auto rounded-lg bg-[#E3E3E3] flex text-base font-normal font-montserrat">
                         <div
-                        :class="` transition duration-500 ${cadence === 1 ? 'font-semibold bg-blue-700  ' : 'hover:bg-[#E3E3E3]'} rounded-lg cursor-pointer w-1/2 text-center py-px md:py-2`"  @click="cadence = 1">
+                        :class="` transition duration-500 ${cadence === 1 ? 'font-semibold bg-blue-700' : 'hover:bg-[#E3E3E3]'} rounded-lg cursor-pointer w-1/2 text-center py-px md:py-2`"  @click="cadence = 1">
                             <p class="text-xxs md:text-base">JOB SEEKERS</p>
                         </div>
                         <div class="p-1"></div>
