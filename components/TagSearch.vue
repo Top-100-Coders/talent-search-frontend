@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full flex items-center">
+    <div class="w-full flex items-center overflow-x-hidden">
         <div v-for="(item, i) in items" :key="i"  class="px-1 py-0.5 text-white font-xs rounded bg-blue-700 w-fit h-fit mr-1 flex gap-1 items-center cursor-pointer" @click="items.splice(i,1)"> 
             <span>
                 {{ item }} 
@@ -25,4 +25,7 @@
         }
         console.log(char.data, items.value);
     }
+    defineExpose({
+        items
+    })
 </script>
