@@ -1,6 +1,13 @@
 <template>
     <div class="scrollHide h-screen w-full flex">
-        <div class="w-5/12 h-full bg-blue-700"/>
+        <div class="w-5/12 h-full bg-blue-700">
+          <div class="h-full w-full flex items-center justify-center transition ease-in-out" v-if="cadence === 1">
+            <img src="/img/undraw_seeker.png" />
+          </div>
+          <div class="h-full w-full flex items-center justify-center transition ease-in-out" v-if="cadence === 2">
+            <img src="/img/undraw_recruiter.png" />
+          </div>
+        </div>
         <div class="w-7/12 h-screen flex items-center justify-center">
             <div class="flex flex-col items-center justify-center gap-4">
             <Logo />
@@ -25,7 +32,7 @@
           <input
             placeholder=""
             type="text"
-            class="focus:outline-none bg-grey px-16 py-3 rounded-full"
+            class="focus:outline-none bg-grey px-16 py-3 rounded"
           />
           </div>
           <div class="flex flex-col">
@@ -33,7 +40,7 @@
           <input
             placeholder=""
             type="text"
-            class="focus:outline-none bg-grey px-16 py-3 rounded-full"
+            class="focus:outline-none bg-grey px-16 py-3 rounded"
           />
           </div>
           <div class="flex flex-col">
@@ -41,10 +48,10 @@
           <input
             placeholder=""
             type="text"
-            class="focus:outline-none bg-grey px-16 py-3 rounded-full"
+            class="focus:outline-none bg-grey px-16 py-3 rounded"
           />
           </div>
-          <button class="focus:outline-none font-bold bg-blue-700 text-white px-14 py-2 rounded-3xl">
+          <button class="focus:outline-none font-bold bg-blue-700 text-white px-14 py-2 rounded">
             SIGN UP
           </button>
         </div>
