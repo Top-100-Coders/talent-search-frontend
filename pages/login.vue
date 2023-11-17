@@ -36,3 +36,8 @@
       </div>
     </div>
 </template>
+<script setup>
+   definePageMeta({
+        layout: 'headerless'
+   })
+</script>

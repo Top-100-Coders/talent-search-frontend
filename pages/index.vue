@@ -1,17 +1,10 @@
 <template>
-    <div class="min-h-screen w-full py-8">
-        <div class="flex justify-between px-16">
-            <Logo />
-            <div class="flex gap-4">
-                <button class="px-8 bg-blue-700/80 hover:bg-blue-700 cursor-pointer text-white whitespace-nowrap font-semibold" @click="router.push('/login')">Sign In</button>
-                <button class="px-8 text-black/60 hover:text-black cursor-pointer whitespace-nowrap font-semibold" @click="router.push('/register')">Sign Up</button>
-            </div>
-        </div>
+    <div class="h-full w-full">
         <div class="container flex pt-32 mx-auto gap-32 px-16">
-            <div class="text-[110px] font-extralight">
+            <div class="text-[90px] font-light flex items-center">
                 <div class="flex flex-col w-fit">
-                    <h1 class="leading-[120px] w-fit">FIND THE BEST</h1>
-                    <h1 class="leading-[120px] w-fit">TALENT HERE</h1>
+                    <h1 class="leading-[110px] w-fit">FIND THE BEST</h1>
+                    <h1 class="leading-[110px] w-fit">TALENT HERE</h1>
                 </div>
             </div>
             <div class="pt-8 w-3/12">
@@ -71,6 +64,3 @@
         </div> -->
     </div>
 </template>
-<script setup>
-const router = useRouter();
-</script>
