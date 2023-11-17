@@ -14,6 +14,10 @@ export default {
         red: "#D21D25CC",
         grey: "#E3E3E3",
       },
+      fontFamily: {
+        quicksand: ["Quicksand", "sans-serif"],
+        montserrat: ["Montserrat", "Quicksand", "sans-serif"],
+      },
     },
   },
   plugins: [],
