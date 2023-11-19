@@ -14,7 +14,12 @@ import { FilterBar } from '#build/components';
                 <div class="flex-1 flex items-center gap-4">
                         <div class="w-1/2 flex gap-2 border-r-2 border-black/30">
                             <SvgSearch class="text-black/60" />
-                            <TagSearch ref="tags" />
+                            <input
+                                v-model="name"
+                                placeholder="Search for Name"
+                                type="text"
+                                class="focus:outline-none h-8 w-full bg-transparent px-2 rounded"
+                            />
                         </div>
                         <div class="w-1/2 flex gap-2 items-center">
                             <SvgLocation class="text-black/60 scale-125" />
@@ -40,41 +45,66 @@ import { FilterBar } from '#build/components';
             <span class="mb-8">{{ data.length }} candidates found</span>
             <div class="flex flex-col gap-4">
                 <div v-for="(item, i) in data" :key="i" class="px-6 gap-4 py-4 border-2 border-grey-200 rounded-lg flex items-center">
-                    <div class="h-16 w-16 bg-center rounded" :style="`background-image: url('${item.image}');`"></div>
+                    <div class="h-16 w-16 bg-center rounded" :style="`background-image: url('${item.image || 'https://images.pexels.com/photos/4195342/pexels-photo-4195342.jpeg?auto=compress&cs=tinysrgb&w=64&h=35&dpr=2'}');`"></div>
                     <div class="flex flex-col">
-                        <span class="font-semibold text-xl"> {{ item.name }}</span>
-                        <span> {{ item.job }}</span>
+                        <div class="flex gap-4">
+                            <span class="font-semibold text-xl"> {{ item.Name }},</span>
+                            <span class="font-semibold text-xl"> {{ item.Karma }}K</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <span class="capitalize"> {{ item.Location }},</span>
+                            <span class="capitalize">Git Activity: {{ item["Git Activity"] }}</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between w-1/2 ml-auto mr-16">
+                        <div class="flex gap-4">
+                            <div class="flex gap-4">
+                                <span class="font-semibold text-xl">Skills</span>
+                            </div>
+                            <div class="flex flex-col mt-1">
+                                <span v-for="(skill, i) in item.Skills" :key="i" class="capitalize text-sm">- {{ skill }}</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex gap-4">
+                                <span class="font-semibold text-xl">Projects</span>
+                            </div>
+                            <div class="flex flex-col mt-1">
+                                <span v-for="(project, i) in item.Projects" :key="i" class="capitalize text-sm">- {{ project }}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <FilterBar ref="filterRef"/>
+        <FilterBar ref="filterRef" @update="(x) => filters = x"/>
     </div>
 </template>
 <script setup>
+    const config = useRuntimeConfig();
     const filterRef = ref(null);
     const location = ref(null);
-    const tags = ref(null);
+    const name = ref(null);
 
-    const data = ref([{
-        name: "Josh Bennet",
-        job: "Full-Stack Developer",
-        image: 'https://images.pexels.com/photos/4195342/pexels-photo-4195342.jpeg?auto=compress&cs=tinysrgb&w=64&h=35&dpr=2'
-    },{
-        name: "Veronica Sals",
-        job: "Software Architect",
-        image: 'https://images.pexels.com/photos/16115837/pexels-photo-16115837/free-photo-of-young-elegant-woman-in-a-brown-coat-and-a-hat-posing-in-city.jpeg?auto=compress&cs=tinysrgb&w=1200'
-    },{
-        name: "Richard Bill",
-        job: "Hourly UI Designer",
-        image: 'https://images.pexels.com/photos/3206171/pexels-photo-3206171.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-    }])
+    let filters = ref({});
+
+    const data = ref([])
 
     const viewResults = ref(false);
 
-    function search(){
-        console.log(tags.value.items, location.value);
+    async function search(){
+        if(!location.value && !name.value) return;
+        let query = '?';
+        if(name.value) query += `name=${name.value}&`;
+        if(location.value) query += `location=${location.value}&`;
+        if(filters.value.karma) query += `karma=${filters.value.karma}&`;
+        query = query.slice(0, -1);
+        const { data: users, error } = await useFetch(`${config.api}/users${query}`);
+        if(error.value) {
+            console.log(error.value);
+            return;
+        }
+        data.value = users.value.data;
         viewResults.value = true;
     }
-
 </script>

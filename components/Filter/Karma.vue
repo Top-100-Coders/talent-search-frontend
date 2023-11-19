@@ -22,9 +22,9 @@
   const emit = defineEmits(["update"]);
   const toggle = ref(true);
   const slider = ref(50);
-  
+
   defineExpose({
-    slider
-  });
+    slider,
+  })
   </script>
   

@@ -7,22 +7,19 @@
                     <SVGClose
                     class="text-black/80 hover:text-black cursor-pointer"
                     :size="'32'"
-                    @click="view = false"
+                    @click="closeFn"
                     />
                 </div>
                 <FilterKarma :category="{name: 'Minimum Karma'}" ref="karma"/>
-                <FilterSection v-for="c in categories" :key="c.name" :category="c" @update="(x) => filterChange(c.name, x)" />
+                <FilterSection v-for="c in categories" :key="c.name" :category="c" />
             </div>    
         </div>
     </div>
 </template>
 <script setup>
 const view = ref(false);
-const filters = {};
 const emit = defineEmits(["update"]);
-const route = useRoute();
 const karma = ref(null);
-const queryString = route.query;
 const categories = [
   {
     name: "Sort By",
@@ -43,7 +40,11 @@ function toggleView() {
   view.value = !view.value;
 }
 
-function filterChange(name, options) {
+function closeFn() {
+      view.value = false;
+      emit("update", {
+          karma: karma.value.slider*100,
+      });
 }
 
 defineExpose({
